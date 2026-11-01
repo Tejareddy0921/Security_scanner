@@ -1,0 +1,26 @@
+.app-layout { min-height: 100vh; }
+.main-column { min-width: 0; margin-left: 248px; }
+.page-content { width: min(100%, 1440px); margin: 0 auto; padding: 42px clamp(28px, 5vw, 72px) 36px; }
+.page-heading { margin-bottom: 30px; }
+.page-heading h1 { margin: 8px 0 8px; color: var(--ink); font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif; font-size: clamp(29px, 3vw, 39px); font-weight: 700; letter-spacing: -1.6px; line-height: 1.18; }
+.page-heading > p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.eyebrow { color: #7c8d7f; font-size: 10px; font-weight: 700; letter-spacing: 1.15px; }
+.heading-dot, .wave { color: #86ae6d; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 13px; min-height: 45px; border: 0; border-radius: 8px; padding: 0 19px; font-size: 13px; font-weight: 700; text-decoration: none; transition: transform .18s ease, background .18s ease, box-shadow .18s ease; }
+.button:hover:not(:disabled) { transform: translateY(-1px); }
+.button-primary { color: white; background: var(--green); box-shadow: 0 5px 12px rgba(40, 99, 77, .13); }
+.button-primary:hover:not(:disabled) { background: var(--green-dark); box-shadow: 0 7px 18px rgba(40, 99, 77, .2); }
+.button-primary:disabled { cursor: not-allowed; opacity: .55; }
+.text-button { display: inline-flex; align-items: center; gap: 8px; border: 0; padding: 6px 0; color: var(--green); background: transparent; font-size: 12px; font-weight: 700; }
+.text-button:hover { color: var(--green-dark); }
+.empty-icon { display: grid; width: 45px; height: 45px; place-items: center; border-radius: 14px; color: var(--green); background: #edf3eb; font-size: 25px; }
+
+@media (max-width: 800px) {
+  .main-column { margin-left: 0; }
+  .page-content { padding: 32px 24px; }
+}
+@media (max-width: 520px) {
+  .page-content { padding: 26px 17px 32px; }
+  .page-heading { margin-bottom: 23px; }
+  .page-heading h1 { letter-spacing: -1px; }
+}

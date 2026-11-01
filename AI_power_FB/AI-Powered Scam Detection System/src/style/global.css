@@ -1,0 +1,37 @@
+:root {
+  font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  color: #252a28;
+  background: #f7f8f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  --ink: #252a28;
+  --muted: #7f8983;
+  --line: #e8ece7;
+  --paper: #fff;
+  --canvas: #f7f8f5;
+  --green: #28634d;
+  --green-dark: #1f503e;
+  --green-soft: #eaf2ec;
+  --mint: #d9e9dc;
+  --lime: #cae2a2;
+  --orange: #c87549;
+  --red: #bd625d;
+  --shadow: 0 14px 45px rgba(33, 61, 46, 0.055);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid rgba(75, 132, 99, .35); outline-offset: 3px; }
+::selection { color: #17382b; background: #d7ebd8; }

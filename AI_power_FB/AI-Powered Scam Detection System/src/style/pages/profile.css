@@ -1,0 +1,13 @@
+.profile-card { overflow: hidden; max-width: 780px; border: 1px solid #e7ece6; border-radius: 11px; background: white; box-shadow: 0 4px 16px rgba(33, 61, 46, .025); }
+.profile-banner { display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #edf0ec; padding: 23px 25px; background: #f7f9f5; }
+.profile-avatar { display: grid; width: 54px; height: 54px; flex: 0 0 auto; place-items: center; border: 1px solid #dce7d8; border-radius: 50%; color: #4f704b; background: #eaf1e6; font-family: Manrope, sans-serif; font-size: 17px; font-weight: 700; }
+.profile-banner h2 { margin: 4px 0 0; color: #38443b; font-family: Manrope, sans-serif; font-size: 19px; font-weight: 700; }
+.profile-badge { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; border: 1px solid #e4ebdf; border-radius: 30px; padding: 6px 10px; color: #6d8365; background: #f4f8f0; font-size: 9px; font-weight: 700; }
+.profile-badge > span { width: 6px; height: 6px; }
+.profile-details { padding: 5px 25px; }
+.detail-row { display: flex; min-height: 57px; align-items: center; justify-content: space-between; gap: 15px; border-bottom: 1px solid #f0f2ef; }
+.detail-row:last-child { border-bottom: 0; }
+.detail-row > span { color: #929c94; font-size: 11px; }
+.detail-row > strong { color: #505c53; text-align: right; font-size: 11px; font-weight: 600; }
+.profile-note { margin: 4px 25px 20px; border-radius: 7px; padding: 12px 13px; color: #839083; background: #f5f8f2; font-size: 10px; line-height: 1.6; }
+@media (max-width: 520px) { .profile-banner { padding: 18px 15px; } .profile-details { padding: 4px 15px; } .profile-note { margin: 4px 15px 15px; } .detail-row { align-items: flex-start; flex-direction: column; justify-content: center; gap: 4px; padding: 10px 0; } .detail-row > strong { text-align: left; } }
