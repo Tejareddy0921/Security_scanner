@@ -36,7 +36,7 @@ export default function Dashboard({ onNavigate, user, token }) {
         <article className="summary-card"><span className="summary-icon icon-review">!</span><div className="summary-label">Worth a closer look</div><strong>{cautionCount}</strong><span className="summary-caption">use extra care</span></article>
       </section>
       <section className="dashboard-lower">
-        <div className="recent-panel">
+        <div className="recent-panel">Security_scanner
           <div className="section-heading"><div><span className="eyebrow">YOUR ACTIVITY</span><h2>Recent checks</h2></div><button type="button" className="text-button" onClick={() => onNavigate('history')}>See history <span aria-hidden="true">→</span></button></div>
           {isLoading ? <div className="empty-activity" role="status"><div><strong>Loading your recent checks…</strong></div></div>
             : error ? <div className="empty-activity" role="alert"><div><strong>Couldn’t load recent checks</strong><p>{error}</p></div><button className="text-button" type="button" onClick={() => setReloadCount((count) => count + 1)}>Try again</button></div>

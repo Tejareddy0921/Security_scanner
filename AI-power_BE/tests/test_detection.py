@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock
 import httpx
 import pytest
 from bson import ObjectId
-from groq import APIConnectionError, APITimeoutError, AuthenticationError, RateLimitError
+from groq import APIConnectionError, APIStatusError, APITimeoutError, AuthenticationError, RateLimitError
 from pydantic import ValidationError
 
 from app.ai.groq_service import GroqService
@@ -186,6 +186,9 @@ def test_groq_service_uses_strict_schema_and_validates_structured_response():
     assert result.scam_type == "phishing"
     assert request["model"] == "openai/gpt-oss-20b"
     assert request["response_format"]["json_schema"]["strict"] is True
+    assert request["response_format"]["json_schema"]["schema"]["properties"]["scam_type"] == {
+        "anyOf": [{"type": "string"}, {"type": "null"}]
+    }
     assert set(request["response_format"]["json_schema"]["schema"]["required"]) == {
         "label", "confidence_score", "scam_type", "risk_factors", "recommendations", "explanation"
     }
@@ -210,13 +213,18 @@ def test_groq_service_accepts_a_normal_low_risk_message_result():
 
 
 @pytest.mark.parametrize("content", ["not json", '{"label":"scam","confidence_score":2,"explanation":"bad"}', "{}"])
-def test_groq_service_rejects_malformed_or_out_of_range_results(content):
+def test_groq_service_rejects_malformed_or_out_of_range_results(content, caplog):
+    caplog.set_level("WARNING", logger="app.groq")
+
     async def run():
         client = _groq_client(content)
         await GroqService(client, Settings(secret_key="a" * 40)).classify([])
 
     with pytest.raises(InvalidAIResponseError):
         asyncio.run(run())
+    expected_stage = "decode" if content == "not json" else "validate"
+    assert f"stage={expected_stage}" in caplog.text
+    assert content not in caplog.text
 
 
 @pytest.mark.parametrize(
@@ -248,3 +256,29 @@ def test_groq_service_maps_provider_failures_to_safe_errors(error_type, expected
         asyncio.run(run())
     assert "invalid API key" not in str(raised.value)
     assert "provider rate limit" not in str(raised.value)
+
+
+def test_groq_service_logs_safe_fields_for_bad_request(caplog):
+    caplog.set_level("ERROR", logger="app.groq")
+    request = httpx.Request("POST", "https://api.groq.com/openai/v1/chat/completions")
+    response = httpx.Response(400, request=request)
+    error = APIStatusError(
+        "Bad request",
+        response=response,
+        body={
+            "error": {
+                "code": "invalid_json_schema",
+                "param": "response_format",
+                "message": "private provider details",
+            }
+        },
+    )
+
+    async def run():
+        await GroqService(_groq_client(error=error), Settings(secret_key="a" * 40)).classify([])
+
+    with pytest.raises(AIProviderError):
+        asyncio.run(run())
+    assert "code=invalid_json_schema" in caplog.text
+    assert "param=response_format" in caplog.text
+    assert "private provider details" not in caplog.text
