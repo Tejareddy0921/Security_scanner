@@ -28,8 +28,21 @@ export default function Dashboard({ onNavigate, user, token }) {
 
   return (
     <div className="dashboard-page">
-      <section className="welcome-row"><div><span className="eyebrow">YOUR SAFETY, AT A GLANCE</span><h1>Good to see you, {firstName}<span className="wave">.</span></h1><p>A quick check can help you feel more confident about what lands in your inbox.</p></div><button className="button button-primary" type="button" onClick={() => onNavigate('scan')}>Check a message <span aria-hidden="true">→</span></button></section>
-      <section className="hero-panel"><div className="hero-copy"><span className="hero-pill"><span /> YOUR SECOND PAIR OF EYES</span><h2>Not sure about that message?</h2><p>Paste it in and we’ll look for common scam warning signs together.</p><button className="button button-light" type="button" onClick={() => onNavigate('scan')}>Start a quick check <span aria-hidden="true">↗</span></button></div><div className="hero-art" aria-hidden="true"><div className="art-ring ring-back" /><div className="art-ring ring-front" /><div className="art-shield"><span>✓</span></div><div className="art-spark spark-a">✳</div><div className="art-spark spark-b">✦</div></div></section>
+      <section className="welcome-row">
+        <div>
+          <span className="eyebrow">YOUR SAFETY, AT A GLANCE</span>
+          <h1>Good to see you, {firstName}<span className="wave">.</span>
+          </h1><p>A quick check can help you feel more confident about what lands in your inbox.</p>
+        </div>
+          <button className="button button-primary" type="button" onClick={() => onNavigate('scan')}>Check a message <span aria-hidden="true">→</span></button></section>
+      <section className="hero-panel">
+        <div className="hero-copy">
+          <span className="hero-pill">
+            <span /> YOUR SECOND PAIR OF EYES</span>
+            <h2>Not sure about that message?</h2>
+            <p>Paste it in and we’ll look for common scam warning signs together.</p>
+            <button className="button button-light" type="button" onClick={() => onNavigate('scan')}>Start a quick check <span aria-hidden="true">↗</span></button></div>
+            <div className="hero-art" aria-hidden="true"><div className="art-ring ring-back" /><div className="art-ring ring-front" /><div className="art-shield"><span>✓</span></div><div className="art-spark spark-a">✳</div><div className="art-spark spark-b">✦</div></div></section>
       <section className="summary-grid" aria-label="Your scan summary">
         <article className="summary-card"><span className="summary-icon icon-check">✓</span><div className="summary-label">Messages checked</div><strong>{summaryReady ? history.length : '—'}</strong><span className="summary-caption">in your account</span></article>
         <article className="summary-card"><span className="summary-icon icon-safe">⌁</span><div className="summary-label">Low risk</div><strong>{safeCount}</strong><span className="summary-caption">looked okay</span></article>
